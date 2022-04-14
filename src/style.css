@@ -1,0 +1,33 @@
+.App {
+    height: 100vh; 
+}
+
+.wrapper {    
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(238, 238, 238);
+}
+
+.grid {
+    
+    display: flex;
+    justify-self: center;
+    align-self: center;
+}
+
+.paper {
+   width: 50%;
+   height: 550px;
+   overflow-y: auto;
+}
+
+.cardWrapper {
+    width: 100%;
+    
+}
+
+
