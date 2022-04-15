@@ -21,7 +21,6 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import axios from "axios";
 
 import './style.css';
-import { NearMeDisabledOutlined } from '@mui/icons-material';
 
 
 const Profiles = props => {
@@ -67,20 +66,33 @@ const Profiles = props => {
        
        let keyword = e.target.value;
        if(keyword !== '') {
+        if(filterList==null) {
           const filterStudents = stateObj.data.students.filter( item => {
             return(item.firstName.toLowerCase().startsWith(keyword.toLowerCase()) || item.lastName.toLowerCase().startsWith(keyword.toLowerCase()));
           });
-        setFilterList(filterStudents);
+          setFilterList(filterStudents);
+        }else {
+          const filterStudents = filterList.filter( item => {
+            return(item.firstName.toLowerCase().startsWith(keyword.toLowerCase()) || item.lastName.toLowerCase().startsWith(keyword.toLowerCase()));
+          });
+          setFilterList(filterStudents);
+        }   
        }else  setFilterList(null);
     };
 
+
     const matchId = (id, temp) => {
-      temp.map(i=> {
+      let arr = [];
+      temp.map(i => {
         if(id==i.id)
-         return true;
+         arr.push(id); 
       });
-      return false;
-    }
+
+      if(arr.length>0) {
+        return true;
+      }else return false;
+    };
+
 
     const filterTag = e => {
 
@@ -110,11 +122,14 @@ const Profiles = props => {
             }
           }
 
-          const filterStudents = stateObj.data.students.filter( item => matchId(item.id, temp));
+          const filterStudents = stateObj.data.students.filter( item => {
+            return matchId(item.id, temp);
+          });
           setFilterList(filterStudents);
         }
       }else setFilterList(null);
     };
+    
 
     const info = (email, company, skill, grades) =>
       <React.Fragment>
@@ -213,7 +228,7 @@ const Profiles = props => {
                 sx={{width: '100%'}} 
                 onChange={filterTag} 
               />
-              { stateObj.data!=null? (filterList&&filterList.length > 0? 
+              { stateObj.data!=null? (filterList? (filterList.length > 0? 
                 filterList.map((item,index) =>  <React.Fragment>
                  <Accordion elevation={0} expanded={expanded === `panel${index+1}`} onChange={handleExpand(`panel${index+1}`)}>
                   <AccordionSummary
@@ -250,8 +265,8 @@ const Profiles = props => {
                  <Stack direction="row" spacing={1}>
                   {label.length>0?  
                       (label.map(el => {
-                        if(el.key==index)
-                         return <Chip label={el.val} sx={{borderRadius: 1, backgroundColor: '#d6d6d6'}} />;
+                        if(el.id==item.id)
+                         return <Chip label={el.val} sx={{borderRadius: 1, backgroundColor: '#d6d6d6', fontFamily: "'Raleway', sans-serif", fontWeight: 'bold'}} />;
                       }))
                       :null}
                  </Stack>
@@ -266,7 +281,7 @@ const Profiles = props => {
                     onKeyPress={handleKeyPress} 
                  /> 
                  </div>
-                 </React.Fragment>
+                 </React.Fragment>): <Typography sx={{marginTop: 10, marginLeft: 25, fontFamily: "'Raleway', sans-serif", fontWeight: 'bold'}} component="p" variant="h5" color="text.primary"> No matching</Typography>
                 ) :  stateObj.data.students.map((item,index) => <React.Fragment>
                  <Accordion elevation={0} expanded={expanded === `panel${index+1}`} onChange={handleExpand(`panel${index+1}`)}>
                   <AccordionSummary
@@ -301,8 +316,8 @@ const Profiles = props => {
                  <Stack direction="row" spacing={1}>
                     {label.length>0?  
                       (label.map(el => {
-                        if(el.key==index)
-                         return <Chip label={el.val} sx={{borderRadius: 1, backgroundColor: '#d6d6d6'}}/>;
+                        if(el.id==item.id)
+                         return <Chip label={el.val} sx={{borderRadius: 1, backgroundColor: '#d6d6d6', fontFamily: "'Raleway', sans-serif", fontWeight: 'bold'}}/>;
                       }))
                       :null}
                  </Stack>
