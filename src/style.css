@@ -19,15 +19,39 @@
     align-self: center;
 }
 
-.paper {
-   width: 50%;
-   height: 550px;
-   overflow-y: auto;
+@media screen and (max-width: 578px) {
+    .paper {
+   
+        width: 80%;
+        height: 580px;
+        overflow-y: auto;
+     }
+
 }
+
+@media screen and (min-width: 579px) {
+    .paper {
+   
+        width: 80%;
+        height: 580px;
+        overflow-y: auto;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .paper {
+   
+        width: 580px;
+        height: 580px;
+        overflow-y: auto;
+    }
+}
+
 
 .cardWrapper {
     width: 100%;
     
 }
+
 
 
