@@ -3,6 +3,8 @@ This is example showcase for react filter app. This filter app will fetch api fr
 
 This app was built with using React, Material-Ui and Axios
 
+[View demo](https://react-filter-showcase.netlify.app/)
+
 ### Layout
 <img src="./img/screen1.png" width="400" height="400" />
 
