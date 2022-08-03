@@ -1,6 +1,8 @@
 # React filter app example
 This is example showcase for react filter app. This filter app will fetch api from https://api.hatchways.io/assessment/students
 
+This app was built with using React, Material-Ui and Axios
+
 ### Layout
 <img src="./img/screen1.png" width="400" height="400" />
 
